@@ -1,0 +1,38 @@
+
+
+# services/indexer/package.json
+{
+ "name": "indexer",
+ "type": "module",
+ "scripts": { "start": "node dist/index.js", "dev": "tsx src/index.ts" },
+ "dependencies": {
+ "nostr-tools": "^2.7.0",
+ "pg": "^8.11.5",
+ "express": "^4.19.0"
+ },
+ "devDependencies": { "tsx": "^4.7.0", "typescript": "^5.5.0" }
+}
+# services/indexer/src/schema.sql (MVP)
+CREATE TABLE IF NOT EXISTS developers(
+ pubkey TEXT PRIMARY KEY,
+ display_name TEXT,
+ email_domain TEXT,
+ verified BOOLEAN DEFAULT false
+);
+CREATE TABLE IF NOT EXISTS projects(
+ id TEXT PRIMARY KEY,
+ name TEXT,
+ summary TEXT,
+ license TEXT
+);
+CREATE TABLE IF NOT EXISTS contributions(
+ id TEXT PRIMARY KEY,
+ project_id TEXT,
+ pubkey TEXT,
+ repo_url TEXT,
+ commit_sha TEXT,
+ summary TEXT,
+ loc_delta INT,
+ created_at TIMESTAMP DEFAULT now()
+);
+
