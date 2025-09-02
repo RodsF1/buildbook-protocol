@@ -1,0 +1,25 @@
+
+# package.json (root)
+{
+ "name": "buildbook-protocol",
+ "private": true,
+ "packageManager": "pnpm@9.0.0",
+ "workspaces": ["apps/*", "services/*", "packages/*"],
+ "scripts": {
+ "bootstrap": "pnpm -r install",
+ "build": "pnpm -r build",
+ "lint": "pnpm -r lint",
+ "test": "pnpm -r test"
+ }
+}
+# pnpm-workspace.yaml
+packages:
+ - "apps/*"
+ - "services/*"
+ - "packages/*"
+# .gitignore
+node_modules
+dist
+.env
+.env.*
+.DS_Store
